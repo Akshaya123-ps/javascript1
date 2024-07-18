@@ -1,16 +1,28 @@
-var arr=[2,2,5,8,5,4,6,8,2];
-var d=1,i,j;
-var e=0;
-var item;
-for(i=0;i<arr.length;i++){
-    for(j=i;j<arr.length;j++)
-    {
-        if(arr[i]==arr[j])e++;
-        if(d<e){
-            d=e;
-            item=arr[i];
-        }
+var arr = [2, 2, 5,5, 8, 5, 4, 6, 8, 2];
+var freq ={};
+var maxFreq= 0;
+var mostFreq=[];
+
+// Count frequencies of each element
+for (var i = 0; i < arr.length; i++) {
+    var r = arr[i];
+    if (freq[r] === undefined) {
+        freq[r] = 0;
     }
-    e=0;
+    freq[r]++;
+    
+    // Track maximum frequency encountered so far
+    if (freq[r] > maxFreq) {
+        maxFreq = freq[r];
+        // Reset the array of most frequent items
+        mostFreq = [r];
+    } else if (freq[r] === maxFreq) {
+        // Add element to the array of most frequent items
+        mostFreq.push(r);
+    }
 }
-console.log(item+" ("+d+" times)");
+
+// Output the most frequent elements
+mostFreq.forEach(function(item) {
+    console.log(item + " (" + maxFreq + " times)");
+});
